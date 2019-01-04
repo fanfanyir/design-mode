@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script
+        src="https://code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous"></script>
+<script>
+    //自定义回调
+    var callbacks = $.Callbacks()//注意大小写
+    callbacks.add(function (info) {
+        console.log('fn1', info)
+    })
+    callbacks.add(function (info) {
+        console.log('fn2', info)
+    })
+    callbacks.add(function (info) {
+        console.log('fn3', info)
+    })
+    callbacks.fire('ogogoo')
+    callbacks.fire('fire')
+</script>
+</body>
+
+</html>

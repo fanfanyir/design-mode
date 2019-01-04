@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    //创建一个主题
+    class Subject {
+        //构造函数
+        constructor(){
+            this.state = 0;
+            this.observers = []
+        }
+        getState(){
+            return this.state
+        }
+        //数据改变的时候触发并通知所有的观察者
+        setState(state){
+            this.state = state;
+            this.notifyAllObservers()
+        }
+        notifyAllObservers(){
+            //遍历当前所有的观察者
+            this.observers.forEach(observer =>{
+                observer.update()
+            })
+        }
+        //添加新的观察者
+        attach(observer){
+            this.observers.push(observer)
+        }
+    }
+
+    //观察者的类
+    class Observer {
+        constructor(name, subject){
+            this.name = name;
+            this.subject = subject;
+            //初始化完之后,把自己添加进当前的主题中来（观察者的数组observers里 ）
+            this.subject.attach(this);
+        }
+        update(){
+            console.log(`${this.name} update.state:${this.subject.getState()}`)
+        }
+    }
+
+    let s = new Subject();
+    let  o1 = new Observer('o1', s);
+    let  o2 = new Observer('o2', s);
+    let  o3 = new Observer('o3', s);
+    s.setState(1)
+    s.setState(0)
+</script>
+</html>
